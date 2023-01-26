@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
-    public float speed = 5.0f;
+    private float speed = 2.0f;
     private GameObject focalPoint;
     public GameObject powerupIndicator;
+    private Quaternion powerupIndicatorRotation;
 
-    public bool hasPowerup = false;
+    private bool hasPowerup = false;
     private float powerupStrength = 15.0f;
 
     // Start is called before the first frame update
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
+        powerupIndicatorRotation = powerupIndicator.transform.rotation;
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(focalPoint.transform.forward * speed * forwardInput);
 
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+        powerupIndicator.transform.rotation = powerupIndicatorRotation;
     }
 
     private void OnTriggerEnter(Collider other)
