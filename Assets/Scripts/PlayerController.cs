@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     private float speed = 2.0f;
     private GameObject focalPoint;
     public GameObject powerupIndicator;
-    private Quaternion powerupIndicatorRotation;
 
     private bool hasPowerup = false;
     private float powerupStrength = 15.0f;
@@ -18,7 +17,6 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
-        powerupIndicatorRotation = powerupIndicator.transform.rotation;
     }
 
     // Update is called once per frame
@@ -28,7 +26,6 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(focalPoint.transform.forward * speed * forwardInput);
 
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
-        powerupIndicator.transform.rotation = powerupIndicatorRotation;
     }
 
     private void OnTriggerEnter(Collider other)
